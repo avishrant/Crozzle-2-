@@ -22,13 +22,11 @@
       <h3>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
 
-<p>I couldn’t find reference to this particular problem anywhere (except from a programmer of the month competition in 1995). This is very similar to solving a crossword however there are some differences. There isn’t a great deal of good source code floating around.</p>
-
-<p>Note: The following is meant to provide insight into the problem that is crossword solving algorithm.
+<p>I couldn’t find reference to this particular problem anywhere (except from a programmer of the month competition in 1995). This is very similar to solving a crossword however there are some differences. There isn’t a great deal of good source code floating around.
+Note: The following is meant to provide insight into the problem that is crossword solving algorithm.
 Note: The following is based on a game called a Crozzle. The rules for the game Crozzle can be googled to be understood.
-Note: Specific conditions apply to this solution please refer to the rules.</p>
-
-<p>Here I am not going to provide any mathematical notation or even a proof that I based my approach on, because I didn’t have one!
+Note: Specific conditions apply to this solution please refer to the rules.
+Here I am not going to provide any mathematical notation or even a proof that I based my approach on, because I didn’t have one!
 The solution presented here was not the one I finally came up with, it is simple and stripped down for maximum readability and is intended to be easily understandable. It still however generates a good solution that can be easily adapted and expanded. 
 The purpose here is to give you in laymen's terms a means to approach the problem with logic and give you a good starting point to create your solution. Do not however get lazy and JUST use this code I went to the trouble of putting this page together because I want you to find a BETTER solution!</p>
 
@@ -58,9 +56,8 @@ That’s it make some assumptions about the problem and try them!</p>
 • Words with the most common occurring characters.
 • Long words (if you’re trying to maximize intersections).
 • Starting with a short word.
-• Starting with a long word.</p>
-
-<p>Simple list but you get the point.</p>
+• Starting with a long word.
+Simple list but you get the point.</p>
 
 <p>All im trying to illustrate here is that you through trial and error have to gradually improve your solution, which all starts with something you make up right now!</p>
 
@@ -71,8 +68,8 @@ That’s it make some assumptions about the problem and try them!</p>
 <li>A horizontal word must intersect 1 or 2 vertical words.</li>
 <li>A vertical word must intersect 1 or 2 horizontal words. </li>
 <li>One point for each letter within the Crozzle. </li>
-<li>A horizontal word cannot touch any other horizontal word. Meaning there must be at least one grid space between a horizontal word and any other horizontal word.</li>
-<li>A vertical word cannot touch any other vertical word. That is, there must be at least one grid space between a vertical word and any other vertical word.<br>
+<li>A horizontal word cannot touch any other horizontal word. Meaning there must be at least one grid space between a horizontal word and any other horizontal word (Refer to picture).</li>
+<li>A vertical word cannot touch any other vertical word. That is, there must be at least one grid space between a vertical word and any other vertical word (Refer to picture).<br>
 </li>
 </ol>
 
