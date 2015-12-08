@@ -22,13 +22,19 @@
       <h3>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
 
-<p>I couldn’t find reference to this particular problem anywhere (except from a programmer of the month competition in 1995). This is very similar to solving a crossword however there are some differences. There isn’t a great deal of good source code floating around.
-Note: The following is meant to provide insight into the problem that is crossword solving algorithm.
-Note: The following is based on a game called a Crozzle. The rules for the game Crozzle can be googled to be understood.
-Note: Specific conditions apply to this solution please refer to the rules.
-Here I am not going to provide any mathematical notation or even a proof that I based my approach on, because I didn’t have one!
+<p>I couldn’t find reference to this particular problem anywhere (except from a programmer of the month competition in 1995). This is very similar to solving a crossword however there are differences.</p>
+
+<p>Note: The following is meant to provide insight in layman's terms into the problem that is a crossword solving algorithm.</p>
+
+<p>Note: The following is based on a game called a Crozzle. The rules for the game Crozzle can be googled to be understood.</p>
+
+<p>Note: Specific conditions apply to this solution please refer to the rules.</p>
+
+<p>Here I am not going to provide any mathematical notation or even a proof that I based my approach on, because I didn’t have one!
 The solution presented here was not the one I finally came up with, it is simple and stripped down for maximum readability and is intended to be easily understandable. It still however generates a good solution that can be easily adapted and expanded. 
-The purpose here is to give you in laymen's terms a means to approach the problem with logic and give you a good starting point to create your solution. Do not however get lazy and JUST use this code I went to the trouble of putting this page together because I want you to find a BETTER solution!</p>
+The purpose here is to give you in laymen's terms a means to approach the problem with logic and give you a good starting point to create your solution. </p>
+
+<p>Do not however get lazy and JUST use this code I went to the trouble of putting this explanation together because I want you to find a BETTER solution!</p>
 
 <p>Don’t be afraid of scrapping all of your code and starting from scratch here this problem has no best solution (will explain this later) and your probably not going to come up with it. 
 Instead get the best solution you can dream up and the best way to do that is to build off others work!</p>
@@ -39,12 +45,12 @@ Instead get the best solution you can dream up and the best way to do that is to
 <a id="the-problem" class="anchor" href="#the-problem" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Problem</h3>
 
 <p>Ok so first to get started, there is no real best approach to this problem. You might be thinking what do you mean theres no best solution? Well this particular problem is a NP-Hard problem. Google NP-Hard (some work is involved here).
- Now on first glance, obviously the only way to ensure we have the best possible solution is to check every possible combination. That’s how we know were right we try everything, RIGHT?</p>
+Now at first glance, obviously the only way to ensure we have the best possible solution is to check every possible combination. That’s how we know were right we try everything, RIGHT?</p>
 
 <p>WRONG!</p>
 
 <p>If you aren’t aware yet Ill burst your bubble. You CANT use brute force! 
-As this problem scales there are simply to many options to check (Google around if you don’t believe me!).
+As this problem scales there are simply to many conbinations to check (Google around if you don’t believe me!).
 So now that we’ve established brute force is out the window we need to come up with some solid heuristics!</p>
 
 <p>What are heuristics? You might be asking. A computing definition defines it as "proceeding to a solution by trial and error or by rules that are only loosely defined." 
@@ -56,13 +62,14 @@ That’s it make some assumptions about the problem and try them!</p>
 • Words with the most common occurring characters.
 • Long words (if you’re trying to maximize intersections).
 • Starting with a short word.
-• Starting with a long word.
-Simple list but you get the point.</p>
+• Starting with a long word.</p>
 
-<p>All im trying to illustrate here is that you through trial and error have to gradually improve your solution, which all starts with something you make up right now!</p>
+<p>Simple list but you get the point.</p>
+
+<p>All im trying to illustrate here is that through trial and error you have to gradually improve your solution, which all starts with something you make up right now!</p>
 
 <h3>
-<a id="rules" class="anchor" href="#rules" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rules</h3>
+<a id="rules-for-this-crozzle" class="anchor" href="#rules-for-this-crozzle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rules for this crozzle</h3>
 
 <ol>
 <li>A horizontal word must intersect 1 or 2 vertical words.</li>
@@ -73,7 +80,31 @@ Simple list but you get the point.</p>
 </li>
 </ol>
 
-<p><img src="https://i.imgur.com/cTNCj5l.png" alt="Rule 3, 4 example."></p>
+<p><img src="https://i.imgur.com/cTNCj5l.png" alt="Rule 4, 5 example."></p>
+
+<h3>
+<a id="how-the-program-solves-the-problem" class="anchor" href="#how-the-program-solves-the-problem" aria-hidden="true"><span class="octicon octicon-link"></span></a>How the program solves the problem</h3>
+
+<p>The solution is by no means a best answer, it is a greedy algorithm.
+It iterates over every possible placement, horizontal and vertical for the first word placement (createFirstWordPlacement) trying every word in the wordlist for those particular co-ordinates. It then places as many word connections as many words as possible (createConnectingWordPlacement) to the previous word. It then caches the highescore and continues to generate crozzle combinations until no more are found.
+Because this is a greedy algorithm it doesn’t take an excesively long time to complete execution and find a solution. However youll notice execution does tie up the main worker thread and the program will freeze when in execution. I didn’t putt the crozzle generation on a separate thread as a means to keeep the code simple.</p>
+
+<h3>
+<a id="what-you-should-do" class="anchor" href="#what-you-should-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What you should do</h3>
+
+<p>You should either attempt to optimise this code to get a more optimal solution, or you could re-write the code entirely for something even better. If your re-writing the solution note the (CrozzleGrid) class was designed to be as portable as possible and the code is highly custimasable and re-usable to suit your needs.</p>
+
+<p>The methods:</p>
+
+<p>checkHorizontalWordFitsGrid
+checkVerticalWordFitsGrid
+checkTouchingHorizontalWords
+checkTouchingVerticalWords
+checkHorizontalWordPath
+checkGridIntersections</p>
+
+<p>Are working condition checking methods.
+They can and should be re-used to save you time working out how to test for conditions and allow you more time to optimise your solution!</p>
 
 <h3>
 <a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h3>
